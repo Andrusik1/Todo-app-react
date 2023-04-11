@@ -1,0 +1,248 @@
+//Light
+$VeryLightGray: hsl(0, 0%, 98%);
+$VeryLightGrayishBlue: hsl(236, 33%, 92%);
+$LightGrayishBlue: hsl(233, 11%, 84%);
+$DarkGrayishBlue: hsl(236, 9%, 61%);
+$VeryDarkGrayishBlue: hsl(235, 19%, 35%);
+// Dark
+$VeryDarkBlue: hsl(235, 21%, 11%);
+$VeryDarkDesaturatedBlue: hsl(235, 24%, 19%);
+$LightGrayishBlue: hsl(234, 39%, 85%);
+$LightGrayishBluehover: hsl(236, 33%, 92%);
+$DarkGrayishBlue: hsl(234, 11%, 52%);
+$VeryDarkGrayishBlue: hsl(233, 14%, 35%);
+$VeryDarkGrayishBlue: hsl(237, 14%, 26%);
+$BrightBlue: hsl(220, 98%, 61%);
+$CheckBackground:linear-gradient(90deg, (hsl(192, 100%, 67%) 0%, hsl(280, 87%, 65%) 100%));
+html[data-theme="dark"] {
+  --background-image: url(../images/bg-desktop-dark.jpg);
+  --current-mode-image: url(../images/icon-sun.svg);
+  --background-color:  hsl(235, 21%, 11%);
+  --filter-text-color: hsl(234, 11%, 52%);
+  --task-text-color: hsl(234, 39%, 85%);
+  --task-background-color:hsl(235, 24%, 19%);
+  --button-border-color: hsl(234, 11%, 52%);
+   --task-text-color2:hsl(234, 39%, 85%);
+}
+html[data-theme="light"] {
+  --background-image: url(../images/bg-desktop-light.jpg);
+--current-mode-image: url(../images/icon-moon.svg);
+ --background-color: hsl(234, 39%, 85%);
+  --filter-text-color: hsl(234, 11%, 52%);
+  --task-text-color: hsl(234, 39%, 85%);
+  --task-background-color:hsl(236, 33%, 92%);
+  --button-border-color: hsl(235, 21%, 11%);
+  --task-text-color2:hsl(236, 9%, 61%);
+}
+
+
+
+* {
+	margin: 0;
+	padding: 0;
+	font-family: "Josefin Sans";
+	box-sizing: border-box;
+    transition: 1s;
+    
+}
+@mixin flex($displayType: flex, $alignItems: center, $justifyContent: center) {
+	display: $displayType;
+	align-items: $alignItems;
+	justify-content: $justifyContent;
+}
+@mixin buttonCircle{
+     background: none;
+            border: 2px solid $DarkGrayishBlue;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            margin-left: 2%;
+            transition: 1s;
+          &:hover
+          {
+            transition: 1s;
+            border-color: $BrightBlue;
+          }
+}
+body {
+	@include flex;
+	height: 100dvh;
+	background: var(--background-image);
+	background-size: 100% 30%;
+	background-repeat: no-repeat;
+	background-color: var(--background-color);
+    transition: 0s;
+}
+main {
+	width: clamp(500px,40vw,1200px);
+	height: 80vh;
+}
+.Todo__input {
+	height: 20%;
+	width: 100%;
+	display: flex;
+    flex-direction: column;
+	.Todo__darkMode {
+		@include flex;
+		justify-content: space-between;
+		width: 100%;
+		height: 50%;
+        h1
+        {
+            color: white;
+            letter-spacing: 1vw;
+        }
+        button
+        {
+          
+               border: none;
+    background: var(--current-mode-image);
+    transition: 1s;
+    width: 30px;
+    height: 30px;
+    background-repeat: no-repeat;
+        
+        }
+
+	}
+    .Todo__inputButton
+    {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 40%;
+        background-color: var(--task-background-color);
+        gap:2%;
+        border-radius: 5px;
+        input
+        {
+            width: 100%;
+            height: 100%;
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: var(--task-text-color);
+            &:focus
+            {
+                border: none;
+                outline: none;
+            }
+        }
+        button
+        {
+                   @include buttonCircle;
+                   width: 33px;
+        }
+    }
+}
+.Todo__list
+{
+    height: 80%;
+    width: 100%;
+   
+    .Todo__listTask
+    {
+         &:nth-child(1)
+    {
+        border-radius: 5px 5px 0px 0px;
+    }
+        width: 100%;
+    height: 5vh;
+    display: flex;
+    align-items: center;
+    color:var(--task-text-color2);
+    background-color: var(--task-background-color);
+    border-bottom: 1px solid var(--filter-text-color);
+    gap:2%;
+    .Todo__task--completed
+    {
+        
+        @include buttonCircle;
+        
+  }
+      
+    
+
+    .Todo__task--removeWrapper
+    {
+            display: flex;
+    flex-grow: 2;
+    justify-content: flex-end;
+    }
+    .Todo__task--remove{
+        background: none;
+        outline: none;
+        border: none;
+        height: 100%;
+        display: flex;
+        
+        align-items: center;
+        justify-content: flex-end;
+        margin-right: 2%;
+    }
+    p
+    {
+        font-size: 16px;
+        font-weight: 400;
+    }
+    }   
+    .Todo__filters
+    {
+        width: 100%;
+        height: 5vh;
+        background-color: var(--task-background-color);
+        border-radius: 0px 0px 5px 5px;
+        color: var(--filter-text-color);
+        p
+        {
+            cursor: pointer;
+             transition: 0s;
+        }
+        @include flex;
+        & > p
+        {
+            width: 25%;
+            font-size: 12px;
+            text-align: center;
+        
+        }
+        div
+        {
+            p
+            {
+                font-size: 14px;
+            }
+            width: 60%;
+           justify-content: center;
+            display: flex;
+            align-items: center;
+            gap:2%;
+        }
+    }
+}
+button
+{
+    cursor: pointer;
+}
+.Todo__task--checked
+{
+    background: linear-gradient(90deg, hsl(192, 100%, 67%) 0%, hsl(280, 87%, 65%) 100%) !important;
+    border: none !important;
+    transition: 1s;
+   
+}
+[data-completed="true"]
+{
+    &::before
+    {
+        content: url(../images/icon-check.svg);
+        transition: 1s;
+    }
+}
+@media screen and (max-width:550px) {
+    main
+    {
+        width: 80vw;
+    }
+}
